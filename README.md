@@ -7,3 +7,15 @@
 ## Introduction
 
 [Dataset](https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition)
+
+## Install
+Install pipenv and dependencies
+```bash
+pip install pipenv --user
+pipenv install
+```
+
+```bash
+# Optional if you use vscode jupyter
+pipenv run jupyter notebook
+```
