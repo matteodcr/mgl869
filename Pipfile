@@ -11,6 +11,7 @@ matplotlib = "==3.9.0"
 ucimlrepo = "*"
 ipykernel = "*"
 scikit-learn = "*"
+jinja2 = "*"
 
 [dev-packages]
 
