@@ -10,6 +10,7 @@ numpy4 = "*"
 matplotlib = "*"
 ipykernel = "*"
 scikit-learn = "*"
+jinja2 = "*"
 
 [dev-packages]
 
