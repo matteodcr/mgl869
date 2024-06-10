@@ -1,2 +1,4 @@
 ia_venv/
 ia_venv/pyvenv.cfg
+.venv
+.vscode
