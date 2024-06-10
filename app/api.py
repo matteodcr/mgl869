@@ -1,16 +1,20 @@
 import atexit
 from flask import Flask, Response, abort, request, render_template
 import json
+import os
 import pandas as pd
-import weakref
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from manage import Model, ModelManager
 
 
-
 app = Flask(__name__)
+if "FLASK_BEHIND_REVERSE_PROXY" in os.environ:
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+    )
 
-models = ModelManager("app/models")
+models = ModelManager("models")
 atexit.register(lambda: models.close())
 
 
@@ -29,11 +33,11 @@ def predict():
     if model.estimator is None:
         model.load()
 
-    #try:
-    form = pd.DataFrame({k: [v] for k, v in request.form.items()})[model.estimator["input_columns"]]
-    form = form.astype(model.estimator["input_dtypes"])
-    #except:
-    #    abort(400) # Bad request if field is missing
+    try:
+        form = pd.DataFrame({k: [v] for k, v in request.form.items()})[model.estimator["input_columns"]]
+        form = form.astype(model.estimator["input_dtypes"])
+    except KeyError as err:
+        abort(400, description=str(err)) # Bad request if field is missing
 
     prediction = model.estimator["estimator"].predict(form)
 
