@@ -1,2 +1,5 @@
 ia_venv/
 ia_venv/pyvenv.cfg
+node_modules
+__pycache__
+*.joblib

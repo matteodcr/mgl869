@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction</title>
+</head>
+<body>
+    <!--['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
+       'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE',
+       'CALC', 'MTRANS'-->
+    <form action="{{ url_for('predict') }}" method="post">
+        <p>
+            Votre genre:
+            <input type="radio" name="Gender" id="female" value="0">
+            <label for="female">Femme</label>
+            <input type="radio" name="Gender" id="male" value="1">
+            <label for="male">Homme</label>
+        </p>
+        <p>
+            <label for="age">Votre age:</label>
+            <input type="number" name="Age" id="age">
+        </p>
+        <p>
+            <label for="family_history_with_overweight">Il y a-t-il des antécédents de surpoids dans votre famille ?</label>
+            <select name="family_history_with_overweight" id="family_history_with_overweight">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </p>
+        <p>
+            <label for="FAVC">Mangez-vous fréquemment des aliments hautement caloriques ?</label>
+            <select name="FAVC" id="FAVC">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </p>
+        <p>
+            <label for="FCVC">Mangez-vous fréquemment des légumes ?</label>
+            <select name="FCVC" id="FCVC">
+                <option value="1.0">Jamais</option>
+                <option value="2.0">Parfois</option>
+                <option value="3.0">Toujours</option>
+            </select>
+        </p>
+        <p>
+            <label for="NCP">Combien de repas mangez vous chaque jour ? :</label>
+            <input type="number" name="NCP" id="NCP">
+        </p>
+        <p>
+            <label for="CAEC">Mangez-vous entre les repas ?</label>
+            <select name="CAEC" id="CAEC">
+                <option value="no">Non</option>
+                <option value="Sometimes">Parfois</option>
+                <option value="Frequently">Fréquemment</option>
+                <option value="Always">Toujours</option>
+            </select>
+        </p>
+        <p>
+            <label for="SMOKE">Fumez-vous ?</label>
+            <select name="SMOKE" id="SMOKE">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </p>
+        <p>
+            <label for="CH2O">Quelle quantité d'eau buvez-vous chaque jour ?</label>
+            <select name="CH2O" id="CH2O">
+                <option value="0">Moins de 1L</option>
+                <option value="1">Entre 1L et 2L</option>
+                <option value="2">Plus de 2L</option>
+            </select>
+        </p>
+        <p>
+            <label for="SCC">Contrôlez-vous quotidiennement les calories que vous consommez ?</label>
+            <select name="SCC" id="SCC">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </p>
+        <p>
+            <label for="FAF">À quelle fréquence faites vous des activités physiques ?</label>
+            <select name="FAF" id="FAF">
+                <option value="0.0">Jamais</option>
+                <option value="1.0">1 ou 2 jours</option>
+                <option value="2.0">2 ou 3 jours</option>
+                <option value="3.0">4 ou 5 jours</option>
+            </select>
+        </p>
+        <p>
+            <label for="TUE">Combien de temps utilisez-vous des appareils technologiques tels que le téléphone portable, les jeux vidéo, la télévision, l'ordinateur et autres ?</label>
+            <select name="TUE" id="TUE">
+                <option value="0.0">0-2h</option>
+                <option value="1.0">3-5h</option>
+                <option value="2.0">Plus que 5h</option>
+            </select>
+        </p>
+        <p>
+            <label for="CALC">Buvez-vous des boissons alcoolisées ?</label>
+            <select name="CALC" id="CALC">
+                <option value="no">Non</option>
+                <option value="Sometimes">Parfois</option>
+                <option value="Frequently">Fréquemment</option>
+                <option value="Always">Toujours</option>
+            </select>
+        </p>
+        <p>
+            <label for="MTRANS">Quel moyen de transport empruntez-vous habituellement ?</label>
+            <select name="MTRANS" id="MTRANS">
+                <option value="Public_Transportation">Transport en commun</option>
+                <option value="Automobile">Automobile</option>
+                <option value="Walking">Marche</option>
+                <option value="Bike">Vélo</option>
+                <option value="Motorbike">Moto</option>
+            </select>
+        </p>
+        <button type="submit" onclick="submit(this)">Prédire</button>
+    </form>
+    <script>
+        function submit(e) {
+            console.log(e)
+            // fetch(e.form)
+            return false;
+        }
+    </script>
+</body>
+</html>
