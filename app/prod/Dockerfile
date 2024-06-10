@@ -9,4 +9,11 @@ WORKDIR /usr/src
 ADD app/api.py app/manage.py ./
 ADD app/templates/ ./templates
 
-CMD ["flask", "--app", "api", "run"]
+RUN pip install gunicorn
+
+EXPOSE 8690
+
+RUN addgroup -S mgl869 && adduser -S mgl869 -G mgl869 && chown mgl869:mgl869 /usr/src/models
+USER mgl869
+
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8690", "api:app"]
