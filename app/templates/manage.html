@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage models</title>
+    <style>
+        html, body {
+            box-sizing: border-box;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            box-sizing: border-box;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        footer {
+            bottom: 0;
+            position: sticky;
+            color: gray;
+        }
+
+        table {
+            border: 1px solid black;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 0.5em 1em;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>File name</td>
+                    <th>Upload date</td>
+                    <th>Digest</td>
+                    <th>Status</td>
+                    <th>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in models %}
+                    <tr>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ row.digest }}</td>
+                        <td>{{ "loaded,active" if row.name == active_model.name else "unloaded" }}</td>
+                        <td>
+                            <form action="{{ url_for('manage_post') }}" method="post">
+                                <input type="hidden" name="name" value="{{ row.name }}">
+                                {% if row.name == active_model.name %}
+                                    <button name="action" value="disable" type="submit">disable</button>
+                                {% else %}
+                                    <button name="action" value="activate" type="submit">activate</button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        Mattéo Decorsaire, Michael Leboulanger, Felix Bertagnolio, Edgar Onghena, Paul Cailler
+        <br> MGL869 — été 2024
+    </footer>
+</body>
+</html>

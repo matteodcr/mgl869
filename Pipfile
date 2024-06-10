@@ -11,6 +11,7 @@ matplotlib = "*"
 ipykernel = "*"
 scikit-learn = "*"
 jinja2 = "*"
+flask = "*"
 
 [dev-packages]
 
